@@ -14,7 +14,7 @@ namespace ExperienceGenerator
 
         protected XGenJobManager()
         {
-            Threads = Environment.ProcessorCount*2;
+            Threads = Environment.ProcessorCount * 2;
         }
 
         private readonly ConcurrentDictionary<Guid, JobInfo> _jobs = new ConcurrentDictionary<Guid, JobInfo>();
@@ -34,18 +34,18 @@ namespace ExperienceGenerator
             //Try create a simulator to see if the spec contains any errors, to report them in the creating thread
             spec.CreateSimulator();
 
-            var batchSize = (int) Math.Floor(info.Specification.VisitorCount/(double) Threads);
+            var batchSize = (int)Math.Floor(info.Specification.VisitorCount / (double)Threads);
 
             for (var i = 0; i < Threads; i++)
             {
-                var count = i == Threads - 1 ? info.Specification.VisitorCount - i*batchSize : batchSize;
+                var count = i == Threads - 1 ? info.Specification.VisitorCount - i * batchSize : batchSize;
 
                 if (count <= 0)
                     continue;
                 var segment = new JobSegment(info)
-                              {
-                                  TargetVisitors = count
-                              };
+                {
+                    TargetVisitors = count
+                };
                 info.Segments.Add(segment);
 
                 StartJob(info, segment);

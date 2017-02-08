@@ -2,6 +2,7 @@ define(["underscore"], function (_) {
   var currItr;
   var host;
   var emptyCampaign;
+  var goal;
   var self = this;
 
   self.itemToListElement = function (item) {

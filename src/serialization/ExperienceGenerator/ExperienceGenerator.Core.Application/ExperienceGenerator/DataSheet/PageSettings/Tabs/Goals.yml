@@ -1,0 +1,159 @@
+﻿---
+ID: "eb8bfc25-438f-458f-9c7e-94d43c787b86"
+Parent: "40463b45-8869-4a7e-b86e-2fdc8ce1ae57"
+Template: "f62b4cd7-754c-4461-810f-2b6bd2c92a0d"
+Path: /sitecore/client/Applications/ExperienceGenerator/DataSheet/PageSettings/Tabs/Goals
+DB: core
+SharedFields:
+- ID: "ba3f86a2-4a1c-4d78-b63d-91c2779c1b5e"
+  Hint: __Sortorder
+  Value: 97
+- ID: "deab3795-056f-4421-adf0-758844461b72"
+  Hint: Placeholder Name
+  Value: Goals
+- ID: "f1a1fe9e-a60c-4ddb-a3a0-bb5b29fe732e"
+  Hint: __Renderings
+  Type: layout
+  Value: |
+    <r>
+      <d
+        id="{FE5D7FDF-89C0-4D99-9AA3-B5FBD009C9F3}">
+        <r
+          id="{F6C9F461-FCAF-47DC-AA01-C8C64C2EFFB8}"
+          par="Id=Goals&amp;PaddingType=Top&amp;UsePadding=1"
+          uid="{3F9547D4-6844-41E2-A405-557C7168D95A}" />
+        <r
+          id="{442BD093-FBAD-4E36-BC08-489E16C82D08}"
+          par="Id=GoalExpander&amp;Header=Goal+distribution&amp;IsCollapsible=0"
+          ph="Goals.Content"
+          uid="{1FEB4A68-1A09-4E61-BD40-4655CAFA5109}" />
+        <r
+          id="{F6C9F461-FCAF-47DC-AA01-C8C64C2EFFB8}"
+          par="Id=AddGoalsBorder&amp;PaddingType=All&amp;UsePadding=1"
+          ph="GoalExpander.Body"
+          uid="{15702888-95B2-4485-8922-BF8C2210A407}" />
+        <r
+          id="{C4393722-39FA-4869-9582-3A8EB8983A0D}"
+          par="Id=RowPanel"
+          ph="AddGoalsBorder.Content"
+          uid="{C7666E90-5BB9-4131-837C-70F0189F0E3A}" />
+        <r
+          id="{5CB208F6-1860-426B-8221-FAA85B329848}"
+          par="Id=ColumnPanel&amp;GridColumns=6"
+          ph="RowPanel.Content"
+          uid="{F49A34B5-0F1A-4308-A53F-24AF42BB68AB}" />
+        <r
+          id="{7717EB6C-9F90-4C58-826D-5E87722A0318}"
+          par="Id=Text&amp;Text=Chance+to+trigger+a+goal+on+a+page"
+          ph="ColumnPanel.Content"
+          uid="{637DFA7E-2D02-4163-BB82-7612DF6BAAD2}" />
+        <r
+          id="{5CB208F6-1860-426B-8221-FAA85B329848}"
+          par="Id=ColumnPanel1&amp;GridColumns=6"
+          ph="RowPanel.Content"
+          uid="{5FAE783B-D063-4CEE-8406-A425FDCC3AB3}" />
+        <r
+          id="{57F86E9A-1844-45CE-BF8A-62900AE17A92}"
+          par="Type=range&amp;IsEnabled=1&amp;Id=Percentage&amp;IsVisible=1"
+          ph="ColumnPanel1.Content"
+          uid="{A07E1413-637B-4557-AD67-609C2E090D95}" />
+        <r
+          id="{F6C9F461-FCAF-47DC-AA01-C8C64C2EFFB8}"
+          par="Id=GoalssListBorder&amp;PaddingType=Top&amp;UsePadding=1&amp;ShowBorder=0"
+          ph="Goals.Content"
+          uid="{CAC52FAB-2CB3-4949-A24F-8C4ADF6765AE}" />
+        <r
+          id="{442BD093-FBAD-4E36-BC08-489E16C82D08}"
+          par="Id=GoalsListExpander&amp;Header=Goals&amp;IsCollapsible=0"
+          ph="GoalssListBorder.Content"
+          uid="{28F337C1-B36F-4C7C-B267-A360DE38BD8F}" />
+        <r
+          id="{C4393722-39FA-4869-9582-3A8EB8983A0D}"
+          par="UsePadding=1&amp;Id=GoalsBorder&amp;PaddingType=All"
+          ph="GoalsListExpander.Body"
+          uid="{884DADBE-7B83-43D9-9234-4BDE78ACFCD6}" />
+        <r
+          id="{5CB208F6-1860-426B-8221-FAA85B329848}"
+          par="Id=GoalsListInnerPanel&amp;GridColumns=12"
+          ph="GoalsBorder.Content"
+          uid="{C7FE8930-A181-4C90-96DD-3CEC7F5572BF}" />
+        <r
+          id="{F6C9F461-FCAF-47DC-AA01-C8C64C2EFFB8}"
+          par="Id=GoalsListInnerPanelTopBorder"
+          ph="GoalsListInnerPanel.Content"
+          uid="{95D44041-4FC0-411B-99BF-B5A7B35ACC66}" />
+        <r
+          id="{F6C9F461-FCAF-47DC-AA01-C8C64C2EFFB8}"
+          par="Id=CampaignsListInnerPanelBottomBorder"
+          ph="GoalsListInnerPanel.Content"
+          uid="{D207925D-2D69-4179-A0C0-2F1FE3ED3A9F}" />
+      </d>
+    </r>
+Languages:
+- Language: da
+  Fields:
+  - ID: "b5e02ad9-d56f-4c41-a065-a133db87bdeb"
+    Hint: __Display name
+    Value: Sider
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: "20150314T040855:635619029352174524Z"
+    - ID: "5dd74568-4d4b-44c1-b513-0af5f4cda34f"
+      Hint: __Created by
+      Value: |
+        sitecore\admin
+    - ID: "aea872fb-aa91-4d1a-b877-3ca6fbbb4fd4"
+      Hint: Header
+      Value: Sider
+- Language: "de-DE"
+  Fields:
+  - ID: "b5e02ad9-d56f-4c41-a065-a133db87bdeb"
+    Hint: __Display name
+    Value: Seiten
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: "20150314T041134:635619030945740946Z"
+    - ID: "5dd74568-4d4b-44c1-b513-0af5f4cda34f"
+      Hint: __Created by
+      Value: |
+        sitecore\admin
+    - ID: "aea872fb-aa91-4d1a-b877-3ca6fbbb4fd4"
+      Hint: Header
+      Value: Seiten
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20140708T173403
+    - ID: "3c386bcc-a573-4589-b1bd-edace83dd69d"
+      Hint: Tooltip
+      Value: Define your goals
+    - ID: "aea872fb-aa91-4d1a-b877-3ca6fbbb4fd4"
+      Hint: Header
+      Value: Goals
+- Language: "ja-JP"
+  Fields:
+  - ID: "b5e02ad9-d56f-4c41-a065-a133db87bdeb"
+    Hint: __Display name
+    Value: ページ
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: "20150314T041010:635619030100128340Z"
+    - ID: "5dd74568-4d4b-44c1-b513-0af5f4cda34f"
+      Hint: __Created by
+      Value: |
+        sitecore\admin
+    - ID: "aea872fb-aa91-4d1a-b877-3ca6fbbb4fd4"
+      Hint: Header
+      Value: ページ

@@ -5,6 +5,7 @@ define(["sitecore", "underscore"],
             initialized: function() {
                 this.landingPages = "";
                 this.campaigns = "";
+                this.goals = "";
                 this.devices = "";
                 this.data = {};
                 this.jobId = undefined;
@@ -196,7 +197,13 @@ define(["sitecore", "underscore"],
                             p[key].Id,
                             action,
                             p[key].DefaultWeight);
-                        this.campaigns += p[key].Id + "|";
+
+                        if (targetDivId.startsWith("Campaign")) {
+                            this.campaigns += p[key].Id + "|";
+                        }
+                        else if (targetDivId.startsWith("Goal")) {
+                            this.goals += p[key].Id + "," + p[key].Label + "|";
+                        }
                     }
                 }
             },
@@ -299,6 +306,7 @@ define(["sitecore", "underscore"],
                 this.createSliders("OrganicBorder", this.uiSetup.OrganicSearch);
                 this.createSliders("PPCBorder", this.uiSetup.PpcSearch);
                 this.createRows("CampaignsListInnerPanelTopBorder", this.uiSetup.Campaigns, "none");
+                this.createRows("GoalsListInnerPanelTopBorder", this.uiSetup.Goals, "none");
 
                 this.CdBorder.set("isVisible", !data.TrackerIsEnabled);
                 this.ContentDeliveryValue.set("text", window.location.origin);
@@ -414,10 +422,17 @@ define(["sitecore", "underscore"],
                     obj[section] = {};
                     targ = obj[section];
                 }
-                var $where = $("div[data-sc-id='" + borderName + "']");
-                var $comp = $where.find(".sc-textbox");
+                var $where = $("div[data-sc-id='" + borderName + "']"); // grab tab
+                var $comp = $where.find(".sc-textbox"); // grab all text boxes
                 for (i = 0; i < $comp.length; i++) {
-                    id = $comp.get(i).getAttribute("data-sc-id");
+                    id = $comp.get(i).getAttribute("data-sc-id"); // grab ID for item.
+
+                    if (tab == "Goals" && id != "Percentage") // If we're on goals we need goal name as well as goal id
+                    {
+                        $blarg = $where.find("div[data-sc-id='GoalsListInnerPanelTopBorder'] .landing div.channel-innerlabel");
+                        id += "," + $blarg.get(i-1).innerText;
+                    }
+
                     targ[id] = $comp.get(i).value;
                 }
                 if (section != "Dates") { //Cannot get dates in the same way as Sliders and TextBoxes
@@ -583,6 +598,7 @@ define(["sitecore", "underscore"],
                 this.readDomValues("Search", "Organic");
                 this.readDomValues("Search", "PPC");
                 this.readDomValues("Campaigns");
+                this.readDomValues("Goals");
                 this.readDomValues("Outcomes");
             },
 
@@ -633,6 +649,11 @@ define(["sitecore", "underscore"],
                         Weights: this.toWeights(doc.Channels)
                     },
 
+                    Goal: {
+                        Percentage: 1 * doc.Goals.Percentage / 100,
+                        Weights: this.toWeights(doc.Goals)
+                    },
+
                     Campaign: {
                         Percentage: 1 * doc.Campaigns.Percentage / 100,
                         Weights: this.toWeights(doc.Campaigns)
@@ -642,6 +663,7 @@ define(["sitecore", "underscore"],
                 };
                 delete (defaultSegment.Channel.Weights.Percentage);
                 delete (defaultSegment.Campaign.Weights.Percentage);
+                delete (defaultSegment.Goal.Weights.Percentage);
 
                 request.Specification = {
                     Segments: {

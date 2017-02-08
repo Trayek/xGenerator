@@ -132,6 +132,17 @@ namespace ExperienceGenerator.Client.Controllers
                                                                                                                                              DefaultWeight = 10
                                                                                                                                          }).OrderBy(e => e.Label).ToList();
 
+
+            var goals = db.GetItem(KnownItems.GoalsRoot);
+            options.Goals = goals.Axes.GetDescendants().Where(item => item.TemplateID == GoalItem.TemplateID).Select(item => new SelectionOption
+            {
+                Id = item.ID.ToString(),
+                Label = item.Paths.FullPath.Substring(goals.Paths.FullPath.Length + 1),
+                DefaultWeight = 10
+            }).OrderBy(e => e.Label).ToList();
+
+
+
             options.OrganicSearch = SearchEngine.SearchEngines.Where(e => !e.Ppc).Select(e => new SelectionOption
                                                                                               {
                                                                                                   Id = e.Id,

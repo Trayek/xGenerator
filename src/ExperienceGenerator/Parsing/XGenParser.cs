@@ -92,6 +92,14 @@ namespace ExperienceGenerator.Parsing
                                                                     var value = new NormalGenerator(10, 5).Truncate(1);
                                                                     segment.VisitVariables.AddOrReplace(new OutcomeVariable(parser.ParseSet<string>(token), value.Next));
                                                                 })},
+
+                            {"Goal", VariableFactory.Lambda((segment, token, parser) =>
+                                                                {
+                                                                    var goalPct = token.Value<double?>("Percentage") ?? 0.2;
+                                                                    var goals = parser.ParseWeightedSet<string>(token["Weights"]);
+                                                                    segment.VisitVariables.AddOrReplace(Variables.Random("Goal", () => Randomness.Random.NextDouble() < goalPct ? goals() : null, true));
+                                                                })},
+
                             {"InternalSearch", VariableFactory.Lambda((segment, token, parser) =>
                                                                       {
                                                                           var searchPct = token.Value<double?>("Percentage") ?? 0.2;
@@ -164,6 +172,31 @@ namespace ExperienceGenerator.Parsing
                             segment.VisitVariables.AddOrReplace(new ExternalSearchVariable(() => searchEngine, () => searchKeywords));
                         }
                     }
+
+                    var pageItemInfos = interaction.Pages?.ToArray() ?? Enumerable.Empty<PageItemInfo>();
+                    var pages = new List<PageDefinition>();
+
+                    foreach (var page in pageItemInfos)
+                    {
+                        var pageDefinition = new PageDefinition
+                        {
+                            Path = page.Path
+                        };
+
+                        //set goals
+                        if (page.Goals != null)
+                        {
+                            pageDefinition.RequestVariables.Add("TriggerEvents", page.Goals.Select(x => new TriggerEventData
+                            {
+                                Id = x.Id,
+                                Name = x.DisplayName,
+                                IsGoal = true
+                            }).ToList());
+                        }
+                        pages.Add(pageDefinition);
+                    }
+
+
                     //set userAgent
                     SetUserAgent(segment);
 
@@ -179,10 +212,6 @@ namespace ExperienceGenerator.Parsing
                         segment.VisitVariables.AddOrReplace(new OutcomeVariable(() => new HashSet<string>(outcomes), value.Next));
                     }
 
-                    var pageItemInfos = interaction.Pages?.ToArray() ?? Enumerable.Empty<PageItemInfo>();
-                    var pages = new List<PageDefinition>();
-
-
                     //set campaign (can be overriden below)
                     if (!string.IsNullOrEmpty(interaction.CampaignId) && pageItemInfos.Any())
                     {
@@ -190,25 +219,7 @@ namespace ExperienceGenerator.Parsing
                         pageItemInfo.Path = pageItemInfo.Path + "?sc_camp=" + interaction.CampaignId;
                     }
 
-                    foreach (var page in pageItemInfos)
-                    {
-                        var pageDefinition = new PageDefinition
-                                             {
-                                                 Path = page.Path
-                                             };
-
-                        //set goals
-                        if (page.Goals != null)
-                        {
-                            pageDefinition.RequestVariables.Add("TriggerEvents", page.Goals.Select(x => new TriggerEventData
-                                                                                                        {
-                                                                                                            Id = x.Id,
-                                                                                                            Name = x.DisplayName,
-                                                                                                            IsGoal = true
-                                                                                                        }).ToList());
-                        }
-                        pages.Add(pageDefinition);
-                    }
+                   
 
                     var visitorBehavior = new StrictWalk(_sitecoreRoot, pages);
                     segment.Behavior = () => visitorBehavior;
